@@ -1,0 +1,10 @@
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\bin\Debug\maze_backtracking.exe.config
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\bin\Debug\maze_backtracking.exe
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\bin\Debug\maze_backtracking.pdb
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.csprojAssemblyReference.cache
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.frmMaze.resources
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.Properties.Resources.resources
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.csproj.GenerateResource.cache
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.csproj.CoreCompileInputs.cache
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.exe
+C:\Users\roger\Documents\GitHub\maze-backtracking\maze_backtracking\maze_backtracking\obj\Debug\maze_backtracking.pdb
