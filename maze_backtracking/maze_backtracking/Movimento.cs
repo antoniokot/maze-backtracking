@@ -8,18 +8,18 @@ namespace apCidadesBacktracking
 {
     class Movimento : IComparable<Movimento>	// Classe alterada para auxilio no projeto
     {
-		private int linha, coluna, index;		// Coordenadas da matriz
-		public Movimento(int lin, int col, int i)
+		private int linha, coluna, direcao;		// Coordenadas da matriz
+		public Movimento(int lin, int col, int dir)
 		{
 			linha = lin;
 			coluna = col;
-			index = i;
+			direcao = dir;
 		}
 		public Movimento(int lin, int col)
 		{
 			linha = lin;
 			coluna = col;
-			index = 0;
+			direcao = 0;
 		}
 
 		public int Linha
@@ -32,10 +32,10 @@ namespace apCidadesBacktracking
 			get => coluna;
 			set => coluna = value;
 		}
-        public int Index 
+        public int Direcao 
 		{ 
-			get => index; 
-			set => index = value; 
+			get => direcao; 
+			set => direcao = value; 
 		}
 
         public override String ToString()

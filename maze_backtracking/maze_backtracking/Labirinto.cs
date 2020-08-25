@@ -12,31 +12,31 @@ using System.Net.NetworkInformation;
 
 namespace maze_backtracking
 {
-    class Backtracking
+    class Labirinto
     {
-        char[,] labirinto;
+        char[,] lab;
         int linha;
         int coluna;
 
-        public Backtracking(string nomeArq)
+        public Labirinto(string nomeArq)
         {
             var arq = new StreamReader(nomeArq);
             coluna = int.Parse(arq.ReadLine());
             linha = int.Parse(arq.ReadLine());
-            labirinto = new char[linha, coluna];
+            lab = new char[linha, coluna];
 
             for (int lin = 0; lin < linha; lin++)
             {
                 string umaLinha = arq.ReadLine();
                 for (int col = 0; col < coluna; col++)
-                    labirinto[lin, col] = umaLinha[col];
+                    lab[lin, col] = umaLinha[col];
             }
         }
 
-        public char[,] Labirinto
+        public char[,] Lab
         {
-            get => labirinto;
-            set => labirinto = value;
+            get => lab;
+            set => lab = value;
         }
 
         public int Linha
@@ -61,7 +61,7 @@ namespace maze_backtracking
 
                 for (int col = 0; col < coluna; col++)
                 {
-                    dgv[col, lin].Value = labirinto[lin, col];
+                    dgv[col, lin].Value = lab[lin, col];
                 }
             }
 
@@ -95,7 +95,7 @@ namespace maze_backtracking
             {
                 naoPodeVoltarMais = i == 1 && j == 1 && index == 7;
 
-                char marca = labirinto[i + lin[index], j + col[index]];
+                char marca = lab[i + lin[index], j + col[index]];
 
                 if (marca == 'S')
                 {
@@ -109,7 +109,7 @@ namespace maze_backtracking
                         var mov = pilhaCaminho.Desempilhar();
                         novaPilha.Empilhar(mov);
                     }
-                    
+
                     novaPilha.Exibir(dgvResultado);
                     qtsCaminhos++;
 
@@ -122,7 +122,7 @@ namespace maze_backtracking
                 }
 
                 else
-                if(marca != '#' && marca != '0')
+                if (marca != '#' && marca != '0')
                 {
                     DefinirZero();
 
@@ -135,7 +135,7 @@ namespace maze_backtracking
                 }
 
                 else
-                if(index < 7)
+                if (index < 7)
                     index++;
 
                 if (index == 7)
@@ -143,14 +143,21 @@ namespace maze_backtracking
                     if (!pilhaCaminho.EstaVazia)
                     {
                         DefinirZero();
-                        var mov = pilhaCaminho.Desempilhar();   
+                        var mov = pilhaCaminho.Desempilhar();
 
-                        index = mov.Index + 1;
+                        if (mov.Direcao == 7)
+                            index = 0;
+
+                        else
+                            index = mov.Direcao + 1;
+
                         i = mov.Linha;
                         j = mov.Coluna;
                         ExibirPasso();
+                        //MessageBox.Show("DESEMPILHOU", i + " " + j + " " + index + "");
                     }
                 }
+
 
             }
             if (qtsCaminhos == 0)
@@ -168,7 +175,7 @@ namespace maze_backtracking
             void DefinirZero()
             {
                 dgvLab[j, i].Value = '0';
-                labirinto[i, j] = '0';
+                lab[i, j] = '0';
             }
         }
     }

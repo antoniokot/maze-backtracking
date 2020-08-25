@@ -12,7 +12,7 @@ namespace maze_backtracking
 {
     public partial class frmMaze : Form
     {
-        Backtracking labirinto;
+        Labirinto labirinto;
         public frmMaze()
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace maze_backtracking
         {
             if(dlgOpen.ShowDialog() == DialogResult.OK)
             {
-                labirinto = new Backtracking(dlgOpen.FileName);
+                labirinto = new Labirinto(dlgOpen.FileName);
                 labirinto.Exibir(dgvLabirinto);
             }
         }
