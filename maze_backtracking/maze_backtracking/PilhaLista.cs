@@ -45,15 +45,15 @@ public int Tamanho { get => base.QuantosNos; }
 public void Exibir(DataGridView dgv)
 {
     dgv.ColumnCount = Tamanho;
-    dgv.RowCount = ++dgv.RowCount;
+    dgv.RowCount = dgv.RowCount + 1;
     for (int j = 0; j < dgv.ColumnCount; j++)
-        dgv[j, 0].Value = "";
+        dgv[j, dgv.RowCount-1].Value = "";
 
     var auxiliar = new PilhaLista<Dado>();
     int i = 0;
     while (!this.EstaVazia)
     {
-        dgv[i++, 0].Value = this.OTopo();
+        dgv[i++, dgv.RowCount-1].Value = this.OTopo();
         Thread.Sleep(300);
         Application.DoEvents();
         auxiliar.Empilhar(this.Desempilhar());

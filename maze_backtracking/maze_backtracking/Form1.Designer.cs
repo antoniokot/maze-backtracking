@@ -32,10 +32,10 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvLabirinto = new System.Windows.Forms.DataGridView();
             this.dgvCaminho = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLabirinto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCaminho)).BeginInit();
             this.SuspendLayout();
@@ -86,10 +86,11 @@
             this.dgvCaminho.AllowUserToResizeRows = false;
             this.dgvCaminho.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCaminho.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCaminho.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCaminho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCaminho.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
+            this.dgvCaminho.Enabled = false;
             this.dgvCaminho.Location = new System.Drawing.Point(534, 148);
             this.dgvCaminho.MultiSelect = false;
             this.dgvCaminho.Name = "dgvCaminho";
@@ -97,6 +98,13 @@
             this.dgvCaminho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCaminho.Size = new System.Drawing.Size(350, 264);
             this.dgvCaminho.TabIndex = 3;
+            this.dgvCaminho.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCaminho_CellClick);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Saídas";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 66;
             // 
             // label1
             // 
@@ -121,11 +129,6 @@
             // dlgOpen
             // 
             this.dlgOpen.FileName = "openFileDialog1";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Saídas";
-            this.Column1.Name = "Column1";
             // 
             // frmMaze
             // 

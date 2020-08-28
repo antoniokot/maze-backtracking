@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-using apCidadesBacktracking;
+using System.Drawing;
 using System.ComponentModel;
 using System.Net.NetworkInformation;
 
@@ -86,8 +86,12 @@ namespace maze_backtracking
             int qtsCaminhos = 0;
             int index = 0;
 
+            Random rnd = new Random();
+            Color cor = CorAleatoria();
+
+            dgvLab[1, 1].Style.BackColor = cor;
+
             var pilhaCaminho = new PilhaLista<Movimento>();
-            pilhaCaminho.Empilhar(new Movimento(1, 1));
 
             bool naoPodeVoltarMais = false;
 
@@ -103,6 +107,8 @@ namespace maze_backtracking
                     pilhaCaminho.Empilhar(new Movimento(i, j, index));
 
                     DefinirZero();
+
+                    cor = CorAleatoria();
 
                     while (!pilhaCaminho.EstaVazia)
                     {
@@ -122,27 +128,28 @@ namespace maze_backtracking
                 }
 
                 else
-                if (marca != '#' && marca != '0')
+                if (marca != '#' && marca != '0' && marca != 'I')
                 {
-                    DefinirZero();
+                    if(!EstouNoInicio())
+                        DefinirZero();
+
+                    pilhaCaminho.Empilhar(new Movimento(i, j, index));
 
                     i += lin[index];
                     j += col[index];
 
-                    pilhaCaminho.Empilhar(new Movimento(i, j, index));
                     ExibirPasso();
                     index = 0;
                 }
 
                 else
-                if (index < 7)
-                    index++;
-
                 if (index == 7)
                 {
                     if (!pilhaCaminho.EstaVazia)
                     {
-                        DefinirZero();
+                        if(!EstouNoInicio())
+                            DefinirZero();
+
                         var mov = pilhaCaminho.Desempilhar();
 
                         if (mov.Direcao == 7)
@@ -154,11 +161,11 @@ namespace maze_backtracking
                         i = mov.Linha;
                         j = mov.Coluna;
                         ExibirPasso();
-                        //MessageBox.Show("DESEMPILHOU", i + " " + j + " " + index + "");
                     }
                 }
 
-
+                else
+                    index++;
             }
             if (qtsCaminhos == 0)
                 return false;
@@ -168,6 +175,8 @@ namespace maze_backtracking
             void ExibirPasso()
             {
                 dgvLab.CurrentCell = dgvLab[j, i];
+                dgvLab[j, i].Style.BackColor = cor;
+
                 Thread.Sleep(300);
                 Application.DoEvents();
             }
@@ -176,6 +185,16 @@ namespace maze_backtracking
             {
                 dgvLab[j, i].Value = '0';
                 lab[i, j] = '0';
+            }
+
+            Color CorAleatoria()
+            {
+                return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
+            }
+
+            Boolean EstouNoInicio()
+            {
+                return dgvLab[j, i].Value.ToString()[0] == 'I';
             }
         }
     }
