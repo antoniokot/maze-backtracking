@@ -12,20 +12,21 @@ using System.Net.NetworkInformation;
 
 namespace maze_backtracking
 {
+    // Antônio Hideto Borges Kotsubo - 19162 e Matheus Seiji Luna Noda - 19190
     class Labirinto
     {
-        char[,] lab;
+        char[,] lab;                                                // Declaração dos atributos
         int linha;
         int coluna;
 
-        public Labirinto(string nomeArq)
+        public Labirinto(string nomeArq)                            // Construtor
         {
-            var arq = new StreamReader(nomeArq);
-            coluna = int.Parse(arq.ReadLine());
+            var arq = new StreamReader(nomeArq);                    // Recebe o nome do arquivo
+            coluna = int.Parse(arq.ReadLine());                     // Instancia as variáveis de acordo com os dados do arquivo
             linha = int.Parse(arq.ReadLine());
             lab = new char[linha, coluna];
 
-            for (int lin = 0; lin < linha; lin++)
+            for (int lin = 0; lin < linha; lin++)                   // Estrutura a matriz
             {
                 string umaLinha = arq.ReadLine();
                 for (int col = 0; col < coluna; col++)
@@ -33,7 +34,7 @@ namespace maze_backtracking
             }
         }
 
-        public char[,] Lab
+        public char[,] Lab                                          // Propriedades
         {
             get => lab;
             set => lab = value;
@@ -51,7 +52,7 @@ namespace maze_backtracking
             set => coluna = value;
         }
 
-        public void Exibir(DataGridView dgv)
+        public void Exibir(DataGridView dgv)                        // Este método exibe a matriz do labirinto em um dgv de escolha
         {
             dgv.RowCount = linha;
             dgv.ColumnCount = coluna;
@@ -74,30 +75,30 @@ namespace maze_backtracking
             for (int lin = 0; lin < linha; lin++)
                 dgv.Rows[lin].HeaderCell.Value = (lin).ToString();
 
-            dgv.CurrentCell = dgv[1, 1];
+            dgv.CurrentCell = dgv[1, 1];                             // Posiciona a célula atual na posição [1,1]
         }
 
-        public bool AchouCaminhos(DataGridView dgvLab, DataGridView dgvResultado)
+        public bool AchouCaminhos(DataGridView dgvLab, DataGridView dgvResultado)       // Este método é responsável por achar os caminhos de um labirinto
         {
-            int[] col = new int[8] { 0, 1, 1, 1, 0, -1, -1, -1 };
+            int[] col = new int[8] { 0, 1, 1, 1, 0, -1, -1, -1 };                       // Insere-se, à mão, os valores nos vetores que serão utilizados para realizar um movimento 
             int[] lin = new int[8] { -1, -1, 0, 1, 1, 1, 0, -1 };
-            int i = 1;
+            int i = 1;                                                                  // Declara-se variáveis para linha (i) e coluna (j)
             int j = 1;
-            int qtsCaminhos = 0;
-            int index = 0;
+            int qtsCaminhos = 0;                                                        // Declara-se uma variável que contra o número de caminhos
+            int index = 0;                                                              // E outra para o índice da direção
 
-            Random rnd = new Random();
-            Color cor = CorAleatoria();
+            Random rnd = new Random();                                                  // Instancia-se um objeto da classe Random
+            Color cor = CorAleatoria();                                                 // Chama-se o método interno CorAleatoria, que retorna um cor com valores aleatórios
 
-            dgvLab[1, 1].Style.BackColor = cor;
+            dgvLab[1, 1].Style.BackColor = cor;                                         // Colore o fundo da célula inicial com a cor retornada acima
 
-            var pilhaCaminho = new PilhaLista<Movimento>();
+            var pilhaCaminho = new PilhaLista<Movimento>();                             // Instancia-se um objeto da classe PilhaLista
 
-            bool naoPodeVoltarMais = false;
+            bool naoPodeVoltarMais = false;                                             // E declara-se uma variável controladora boolean
 
             while (!naoPodeVoltarMais)
             {
-                naoPodeVoltarMais = i == 1 && j == 1 && index == 7;
+                naoPodeVoltarMais = i == 1 && j == 1 && index == 7;                     // Confere-se se a posição atual é a inicial (1,1) e não existe direção possível (index = 7)
 
                 char marca = lab[i + lin[index], j + col[index]];
 
@@ -109,6 +110,7 @@ namespace maze_backtracking
                     DefinirZero();
 
                     cor = CorAleatoria();
+
 
                     while (!pilhaCaminho.EstaVazia)
                     {

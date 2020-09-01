@@ -74,7 +74,7 @@
             this.dgvLabirinto.MultiSelect = false;
             this.dgvLabirinto.Name = "dgvLabirinto";
             this.dgvLabirinto.ReadOnly = true;
-            this.dgvLabirinto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvLabirinto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvLabirinto.Size = new System.Drawing.Size(469, 264);
             this.dgvLabirinto.TabIndex = 2;
             // 
