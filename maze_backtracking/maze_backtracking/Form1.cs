@@ -68,14 +68,17 @@ namespace maze_backtracking
             {
                 string[] coordenada = dgvCaminho.Rows[dgvCaminho.CurrentRow.Index].Cells[i].Value.ToString().Split(',');        // Aqui dividem-se os valores de uma célula separados por ","
 
-                linha = int.Parse(coordenada[0].Trim());                                                                // Aqui ocorre a conversão dos valores encontrados para inteiros
-                coluna = int.Parse(coordenada[1].Trim());
-                
-                dgvLabirinto.CurrentCell = dgvLabirinto[coluna, linha];                                                 // Exibe-se passo a passo
-                dgvLabirinto[coluna, linha].Style.BackColor = cor;                                                      // Mudando a cor de fundo da célula atual
+                if (coordenada[0] != "" && coordenada[1] != "")
+                {
+                    linha = int.Parse(coordenada[0].Trim());                                                                // Aqui ocorre a conversão dos valores encontrados para inteiros
+                    coluna = int.Parse(coordenada[1].Trim());
 
-                Thread.Sleep(300);                                                                                      // Um pequeno delay, para deixar os movimentos mais visíveis
-                Application.DoEvents();
+                    dgvLabirinto.CurrentCell = dgvLabirinto[coluna, linha];                                                 // Exibe-se passo a passo
+                    dgvLabirinto[coluna, linha].Style.BackColor = cor;                                                      // Mudando a cor de fundo da célula atual
+
+                    Thread.Sleep(300);                                                                                      // Um pequeno delay, para deixar os movimentos mais visíveis
+                    Application.DoEvents();
+                }
             }
 
             MessageBox.Show("O caminho desejado foi finalizado.", "Caminho escolhido", MessageBoxButtons.OK);           // Exibe-se uma mensagem de sucesso

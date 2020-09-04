@@ -100,48 +100,49 @@ namespace maze_backtracking
             {
                 naoPodeVoltarMais = i == 1 && j == 1 && index == 7;                     // Confere-se se a posição atual é a inicial (1,1) e não existe direção possível (index = 7)
 
-                char marca = lab[i + lin[index], j + col[index]];
+                char marca = lab[i + lin[index], j + col[index]];                       // Verifica-se o valor do caracter na próxima possível posição
 
-                if (marca == 'S')
+                if (marca == 'S')                                                       // Se for igual a S
                 {
-                    var novaPilha = new PilhaLista<Movimento>();
-                    pilhaCaminho.Empilhar(new Movimento(i, j, index));
+                    var novaPilha = new PilhaLista<Movimento>();                        // Cria-se uma instância da classe PilhaLista
+                    pilhaCaminho.Empilhar(new Movimento(i, j, index));                  // Empilha-se o movimento
+                        
+                    DefinirZero();                                                      // Colca-se um zero na posição atual
 
-                    DefinirZero();
-
-                    cor = CorAleatoria();
+                    cor = CorAleatoria();                                               // Adquire-se uma cor aleatória para repintar o labirinto
 
 
-                    while (!pilhaCaminho.EstaVazia)
+                    while (!pilhaCaminho.EstaVazia)                                     
                     {
-                        var mov = pilhaCaminho.Desempilhar();
-                        novaPilha.Empilhar(mov);
+                        var mov = pilhaCaminho.Desempilhar();                           // Aqui ocorre a passagem dos movimentos para uma nova pilha
+                        novaPilha.Empilhar(mov);                                        // de trás para frente
                     }
 
-                    novaPilha.Exibir(dgvResultado);
+                    novaPilha.Exibir(dgvResultado);                                     // Exibe-se esta nova pilha no outro dgv
                     qtsCaminhos++;
 
                     while (!novaPilha.EstaVazia)
                     {
-                        var mov = novaPilha.Desempilhar();
-                        pilhaCaminho.Empilhar(mov);
+                        var mov = novaPilha.Desempilhar();                              // Aqui os movimentos são devolvidos para a pilha original, 
+                        pilhaCaminho.Empilhar(mov);                                     // na ordem original
                     }
-                    index++;
+
+                    index++;                                                           
                 }
 
                 else
-                if (marca != '#' && marca != '0' && marca != 'I')
+                if (marca != '#' && marca != '0' && marca != 'I')                     
                 {
-                    if(!EstouNoInicio())
-                        DefinirZero();
+                    if(!EstouNoInicio())                                                // Se o cursor não estiver no inicio
+                        DefinirZero();                                                  // Coloca-se um zero na posição atual
 
-                    pilhaCaminho.Empilhar(new Movimento(i, j, index));
+                    pilhaCaminho.Empilhar(new Movimento(i, j, index));                  // Empilha-se o movimento atual
 
-                    i += lin[index];
-                    j += col[index];
+                    i += lin[index];                                                    // Os valores de linha e coluna são alterados
+                    j += col[index];                                                    // de acordo com o índice do movimento
 
-                    ExibirPasso();
-                    index = 0;
+                    ExibirPasso();                                                      // Exibe-se um passo
+                    index = 0;                                                          // O índice se torna zero para movimentos futuros
                 }
 
                 else
@@ -149,33 +150,34 @@ namespace maze_backtracking
                 {
                     if (!pilhaCaminho.EstaVazia)
                     {
-                        if(!EstouNoInicio())
-                            DefinirZero();
+                        if(!EstouNoInicio())                                            // Se o cursor não estiver no inicio     
+                            DefinirZero();                                              // Coloca-se um zero na posição atual
 
-                        var mov = pilhaCaminho.Desempilhar();
+                        var mov = pilhaCaminho.Desempilhar();                           // Desempilha-se o último movimento realizado 
 
-                        if (mov.Direcao == 7)
+                        if (mov.Direcao == 7)                                       
                             index = 0;
 
                         else
-                            index = mov.Direcao + 1;
+                            index = mov.Direcao + 1;                                    // O índice recebe o índice do último movimento mais um,
+                                                                                        // para que ele não avance para o mesmo lugar
+                        i = mov.Linha;                                                  // A posição do cursor passa a ser a do último movimento,
+                        j = mov.Coluna;                                                 // ou posição anterior
 
-                        i = mov.Linha;
-                        j = mov.Coluna;
-                        ExibirPasso();
+                        ExibirPasso();                                                  // Exibe-se um passo                                                
                     }
                 }
 
                 else
                     index++;
             }
-            if (qtsCaminhos == 0)
-                return false;
+            if (qtsCaminhos == 0)                                                       // Retorna falso caso a quantidade de caminhos encontrados
+                return false;                                                           // seja igual a zero
 
-            return true;
+            return true;                                                                // Do contrário, retorna true
 
-            void ExibirPasso()
-            {
+            void ExibirPasso()                                                          // Este método é responsável por exibir um movimento
+            {                                                                           // no dgv 
                 dgvLab.CurrentCell = dgvLab[j, i];
                 dgvLab[j, i].Style.BackColor = cor;
 
@@ -183,18 +185,18 @@ namespace maze_backtracking
                 Application.DoEvents();
             }
 
-            void DefinirZero()
-            {
+            void DefinirZero()                                                          // Este método é responsável por colocar um zero  
+            {                                                                           // na posição atual
                 dgvLab[j, i].Value = '0';
                 lab[i, j] = '0';
             }
 
-            Color CorAleatoria()
+            Color CorAleatoria()                                                        // Este método retorna um cor aleatória
             {
                 return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
             }
 
-            Boolean EstouNoInicio()
+            Boolean EstouNoInicio()                                                     // Este método verifica se o cursor do dgv está na posição [1,1]
             {
                 return dgvLab[j, i].Value.ToString()[0] == 'I';
             }

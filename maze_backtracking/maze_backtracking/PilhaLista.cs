@@ -44,22 +44,25 @@ public int Tamanho { get => base.QuantosNos; }
 
 public void Exibir(DataGridView dgv)
 {
-    dgv.ColumnCount = Tamanho;
-    dgv.RowCount = dgv.RowCount + 1;
-    for (int j = 0; j < dgv.ColumnCount; j++)
-        dgv[j, dgv.RowCount-1].Value = "";
+        if (Tamanho > dgv.ColumnCount)
+            dgv.ColumnCount = Tamanho;
+        
+        dgv.RowCount = dgv.RowCount + 1;
+        for (int j = 0; j < dgv.ColumnCount; j++)
+            dgv[j, dgv.RowCount - 1].Value = "";
 
-    var auxiliar = new PilhaLista<Dado>();
-    int i = 0;
-    while (!this.EstaVazia)
-    {
-        dgv[i++, dgv.RowCount-1].Value = this.OTopo();
-        Thread.Sleep(300);
-        Application.DoEvents();
-        auxiliar.Empilhar(this.Desempilhar());
-    }
+        var auxiliar = new PilhaLista<Dado>();
+        int i = 0;
+        while (!this.EstaVazia)
+        {
+            dgv[i++, dgv.RowCount - 1].Value = this.OTopo();
+            Thread.Sleep(300);
+            Application.DoEvents();
+            auxiliar.Empilhar(this.Desempilhar());
+        }
 
-    while (!auxiliar.EstaVazia)
-        this.Empilhar(auxiliar.Desempilhar());
+        while (!auxiliar.EstaVazia)
+            this.Empilhar(auxiliar.Desempilhar());
+
 }
 }

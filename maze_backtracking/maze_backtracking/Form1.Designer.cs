@@ -70,6 +70,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvLabirinto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvLabirinto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLabirinto.Enabled = false;
             this.dgvLabirinto.Location = new System.Drawing.Point(30, 148);
             this.dgvLabirinto.MultiSelect = false;
             this.dgvLabirinto.Name = "dgvLabirinto";
