@@ -25,9 +25,12 @@ namespace maze_backtracking
         {
             dgvCaminho.Enabled = false;                                             // Desabilita o dgv de caminho, que se encontra vazio
             dgvCaminho.RowCount = 0;                                                // Limpamos os dgvs
+            dgvCaminho.ColumnCount = 1;
             dgvLabirinto.RowCount = 0;
 
-            if(dlgOpen.ShowDialog() == DialogResult.OK)                             // Aqui verifica-se se o usuário selecionou um arquivo
+            dgvCaminho.Columns[0].HeaderText = "Saídas";
+
+            if (dlgOpen.ShowDialog() == DialogResult.OK)                             // Aqui verifica-se se o usuário selecionou um arquivo
             {
                 btnBuscar.Enabled = true;                                           // Se tiver selecionado, habilita o botão de busca
                 labirinto = new Labirinto(dlgOpen.FileName);                        // Bem como instancia o objeto da classe Labirinto
@@ -39,6 +42,7 @@ namespace maze_backtracking
         private void btnFind_Click(object sender, EventArgs e)                      // Clique do botão de buscar caminhos
         {
             btnBuscar.Enabled = false;                                              // Desabilita o botão de busca, para que não se faça mais de uma busca por vez
+            btnAbrir.Enabled = false;                                               // Desabilita o botão de abrir, para que não se altere o labirinto em uso
 
             if (dgvLabirinto.RowCount == 0)                                         // Se o dgv com o labirinto estiver vazio, o usuário é forçado e escolher um arquivo
                 btnAbrir.PerformClick();
@@ -48,10 +52,14 @@ namespace maze_backtracking
             {
                 MessageBox.Show($"O labirinto possui {dgvCaminho.RowCount} caminho(s)!", "Caminhos encontrados", MessageBoxButtons.OK);         // Retorna um MessageBox, caso tenha achado
                 dgvCaminho.Enabled = true;                                                                                                      // E habilita o dgv com os caminhos encontrados, que, anteriormente, estava desabilitado
+                btnAbrir.Enabled = true;
             }
 
             else
+            {
                 MessageBox.Show("O labirinto passado não possui caminhos de saída", "Nenhum caminho encontrado", MessageBoxButtons.OK);         // Retorna um MessageBox, caso não tenha encontrado nada
+                btnAbrir.Enabled = true;
+            }
         }
 
         private void dgvCaminho_CellClick(object sender, DataGridViewCellEventArgs e)                                   // Clique em uma linha do dgv

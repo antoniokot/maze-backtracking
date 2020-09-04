@@ -143,7 +143,7 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnAbrir);
             this.Name = "frmMaze";
-            this.Text = "Form1";
+            this.Text = "Labirinto";
             ((System.ComponentModel.ISupportInitialize)(this.dgvLabirinto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCaminho)).EndInit();
             this.ResumeLayout(false);

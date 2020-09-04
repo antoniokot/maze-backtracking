@@ -32,6 +32,7 @@ namespace maze_backtracking
                 for (int col = 0; col < coluna; col++)
                     lab[lin, col] = umaLinha[col];
             }
+            arq.Close();
         }
 
         public char[,] Lab                                          // Propriedades
